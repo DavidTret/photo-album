@@ -13,6 +13,10 @@ namespace photo_album
     {
         public string Find(string input)
         {
+            if (!int.TryParse(input, out int value))
+            {
+                return "albumID must be an int!";
+            }
             throw new NotImplementedException();
         }
     }
