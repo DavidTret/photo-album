@@ -2,15 +2,12 @@
 
 namespace photo_album
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
             Console.WriteLine("Hello, World!");
         }
-    }
-    public class AlbumFinder
-    {
         public string Find(string input)
         {
             // Return if the input is not an int.

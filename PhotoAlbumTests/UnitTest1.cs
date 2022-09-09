@@ -10,7 +10,7 @@ namespace PhotoAlbumTests
         public void BadInputTest()
         {
             // Create an instance to test.
-            AlbumFinder albumFinder = new AlbumFinder();
+            Program albumFinder = new Program();
             // Define test input and outputs.
             string input = "notAnInt";
             string output = "albumID must be an int!";
@@ -22,7 +22,7 @@ namespace PhotoAlbumTests
         public void LowInputTest()
         {
             // Create an instance to test.
-            AlbumFinder albumFinder = new AlbumFinder();
+            Program albumFinder = new Program();
             // Define test input and outputs.
             string input = "0";
             string output = "albumID must be between 1 and 100!";
@@ -34,7 +34,7 @@ namespace PhotoAlbumTests
         public void HighInputTest()
         {
             // Create an instance to test.
-            AlbumFinder albumFinder = new AlbumFinder();
+            Program albumFinder = new Program();
             // Define test input and outputs.
             string input = "101";
             string output = "albumID must be between 1 and 100!";
@@ -46,7 +46,7 @@ namespace PhotoAlbumTests
         public void ValidInputTest()
         {
             // Create an instance to test.
-            AlbumFinder albumFinder = new AlbumFinder();
+            Program albumFinder = new Program();
             // Define test input and outputs.
             string input = "2";
             string output = 
