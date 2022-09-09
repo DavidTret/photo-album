@@ -18,5 +18,29 @@ namespace PhotoAlbumTests
             string programOutput = albumFinder.Find(input);
             Assert.AreEqual(output, programOutput);
         }
+        [TestMethod]
+        public void LowInputTest()
+        {
+            // Create an instance to test.
+            AlbumFinder albumFinder = new AlbumFinder();
+            // Define test input and outputs.
+            string input = "0";
+            string output = "albumID must be between 1 and 100!";
+            // Run the method under the test.
+            string programOutput = albumFinder.Find(input);
+            Assert.AreEqual(output, programOutput);
+        }
+        [TestMethod]
+        public void HighInputTest()
+        {
+            // Create an instance to test.
+            AlbumFinder albumFinder = new AlbumFinder();
+            // Define test input and outputs.
+            string input = "101";
+            string output = "albumID must be between 1 and 100!";
+            // Run the method under the test.
+            string programOutput = albumFinder.Find(input);
+            Assert.AreEqual(output, programOutput);
+        }
     }
 }
