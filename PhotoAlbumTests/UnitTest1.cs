@@ -11,7 +11,7 @@ namespace PhotoAlbumTests
         {
             // Define test input and outputs.
             string input = "notAnInt";
-            string output = "albumID must be an int!";
+            string output = "albumID must be an int!\n";
             // Run the method under the test.
             string programOutput = Program.Find(input);
             Assert.AreEqual(output, programOutput);
@@ -21,7 +21,7 @@ namespace PhotoAlbumTests
         {
             // Define test input and outputs.
             string input = "0";
-            string output = "albumID must be between 1 and 100!";
+            string output = "albumID must be between 1 and 100!\n";
             // Run the method under the test.
             string programOutput = Program.Find(input);
             Assert.AreEqual(output, programOutput);
@@ -31,7 +31,7 @@ namespace PhotoAlbumTests
         {
             // Define test input and outputs.
             string input = "101";
-            string output = "albumID must be between 1 and 100!";
+            string output = "albumID must be between 1 and 100!\n";
             // Run the method under the test.
             string programOutput = Program.Find(input);
             Assert.AreEqual(output, programOutput);

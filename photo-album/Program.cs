@@ -20,10 +20,10 @@ namespace photo_album
         {
             // Return if the input is not an int.
             if (!int.TryParse(input, out int value))
-                return "albumID must be an int!";
+                return "albumID must be an int!\n";
             // Return if the input is not between 1 - 100.
             if (value > 100 || value < 1)
-                return "albumID must be between 1 and 100!";
+                return "albumID must be between 1 and 100!\n";
 
             // Add the album id to the base uri.
             string uri = "https://jsonplaceholder.typicode.com/photos?albumId=" + value.ToString();
@@ -53,7 +53,7 @@ namespace photo_album
             }
             else
             {
-                return "Could not make web request.";
+                return "Could not make web request.\n";
             }
         }
     }
