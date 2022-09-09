@@ -9,44 +9,36 @@ namespace PhotoAlbumTests
         [TestMethod]
         public void BadInputTest()
         {
-            // Create an instance to test.
-            Program albumFinder = new Program();
             // Define test input and outputs.
             string input = "notAnInt";
             string output = "albumID must be an int!";
             // Run the method under the test.
-            string programOutput = albumFinder.Find(input);
+            string programOutput = Program.Find(input);
             Assert.AreEqual(output, programOutput);
         }
         [TestMethod]
         public void LowInputTest()
         {
-            // Create an instance to test.
-            Program albumFinder = new Program();
             // Define test input and outputs.
             string input = "0";
             string output = "albumID must be between 1 and 100!";
             // Run the method under the test.
-            string programOutput = albumFinder.Find(input);
+            string programOutput = Program.Find(input);
             Assert.AreEqual(output, programOutput);
         }
         [TestMethod]
         public void HighInputTest()
         {
-            // Create an instance to test.
-            Program albumFinder = new Program();
             // Define test input and outputs.
             string input = "101";
             string output = "albumID must be between 1 and 100!";
             // Run the method under the test.
-            string programOutput = albumFinder.Find(input);
+            string programOutput = Program.Find(input);
             Assert.AreEqual(output, programOutput);
         }
         [TestMethod]
         public void ValidInputTest()
         {
-            // Create an instance to test.
-            Program albumFinder = new Program();
             // Define test input and outputs.
             string input = "2";
             string output = 
@@ -101,7 +93,7 @@ namespace PhotoAlbumTests
                 "[99] magnam dolor sed enim vel optio consequuntur\n" +
                 "[100] et qui rerum\n";
             // Run the method under the test.
-            string programOutput = albumFinder.Find(input);
+            string programOutput = Program.Find(input);
             Assert.AreEqual(output, programOutput);
         }
     }

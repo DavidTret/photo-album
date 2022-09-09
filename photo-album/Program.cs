@@ -14,7 +14,7 @@ namespace photo_album
                 Console.Write(output);
             }
         }
-        static string Find(string input)
+        public static string Find(string input)
         {
             // Return if the input is not an int.
             if (!int.TryParse(input, out int value))
