@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 
@@ -7,6 +8,7 @@ namespace photo_album
 {
     public class Program
     {
+        private static readonly HttpClient httpClient = new HttpClient();
         static void Main(string[] args)
         {
             while (true)
@@ -27,14 +29,14 @@ namespace photo_album
 
             // Add the album id to the base uri.
             string uri = "https://jsonplaceholder.typicode.com/photos?albumId=" + value.ToString();
-            WebRequest webRequest = WebRequest.Create(uri);
-            HttpWebResponse response = (HttpWebResponse)webRequest.GetResponse();
-            // Ensure the request response is OK.
-            if (response.StatusDescription == "OK")
+
+            try
             {
-                Stream dataStream = response.GetResponseStream();
-                StreamReader reader = new StreamReader(dataStream);
-                string responseFromServer = reader.ReadToEnd();
+                var task = httpClient.GetAsync(uri);
+                task.Wait();
+                var response = task.Result;
+                HttpContent content = response.Content;
+                string responseFromServer = content.ReadAsStringAsync().Result;
                 // Parse the data stream as a Json document.
                 var doc = JsonDocument.Parse(responseFromServer);
                 // Use a string builder to create output string as we loop over the Json array.
@@ -51,7 +53,7 @@ namespace photo_album
                 }
                 return songStrings.ToString();
             }
-            else
+            catch
             {
                 return "Could not make web request.\n";
             }
