@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PhotoAlbum
+namespace photo_album
 {
     class Program
     {
@@ -9,5 +9,11 @@ namespace PhotoAlbum
             Console.WriteLine("Hello, World!");
         }
     }
+    public class AlbumFinder
+    {
+        public string Find(string input)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
-
