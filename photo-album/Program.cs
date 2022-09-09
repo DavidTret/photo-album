@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 
 namespace photo_album
 {
@@ -6,9 +7,14 @@ namespace photo_album
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            while (true)
+            {
+                string input = Console.ReadLine() ?? string.Empty;
+                string output = Find(input);
+                Console.Write(output);
+            }
         }
-        public string Find(string input)
+        static string Find(string input)
         {
             // Return if the input is not an int.
             if (!int.TryParse(input, out int value))
@@ -16,7 +22,20 @@ namespace photo_album
             // Return if the input is not between 1 - 100.
             if (value > 100 || value < 1)
                 return "albumID must be between 1 and 100!";
-            throw new NotImplementedException();
+
+            string uri = "https://jsonplaceholder.typicode.com/photos?albumId=" + value.ToString();
+            WebRequest webRequest = WebRequest.Create(uri);
+            HttpWebResponse response = (HttpWebResponse)webRequest.GetResponse();
+            if (response.StatusDescription == "OK")
+            {
+                Stream dataStream = response.GetResponseStream();
+                StreamReader reader = new StreamReader(dataStream);
+                return reader.ReadToEnd();
+            }
+            else
+            {
+                return "Could not make web request.";
+            }
         }
     }
 }
