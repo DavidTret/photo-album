@@ -25,21 +25,29 @@ namespace photo_album
             if (value > 100 || value < 1)
                 return "albumID must be between 1 and 100!";
 
+            // Add the album id to the base uri.
             string uri = "https://jsonplaceholder.typicode.com/photos?albumId=" + value.ToString();
             WebRequest webRequest = WebRequest.Create(uri);
             HttpWebResponse response = (HttpWebResponse)webRequest.GetResponse();
+            // Ensure the request response is OK.
             if (response.StatusDescription == "OK")
             {
                 Stream dataStream = response.GetResponseStream();
                 StreamReader reader = new StreamReader(dataStream);
                 string responseFromServer = reader.ReadToEnd();
-
+                // Parse the data stream as a Json document.
                 var doc = JsonDocument.Parse(responseFromServer);
+                // Use a string builder to create output string as we loop over the Json array.
                 StringBuilder songStrings = new StringBuilder();
                 foreach (var item in doc.RootElement.EnumerateArray())
                 {
                     foreach (var property in item.EnumerateObject())
-                        songStrings.Append(property.Value.ToString() + '\n');
+                    {
+                        if (property.NameEquals("id"))
+                            songStrings.Append('[' + property.Value.ToString() + ']');
+                        else if (property.NameEquals("title"))
+                            songStrings.Append(' ' + property.Value.ToString() + '\n');
+                    }
                 }
                 return songStrings.ToString();
             }
