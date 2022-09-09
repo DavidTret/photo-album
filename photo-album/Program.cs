@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Net;
+using System.Text;
+using System.Text.Json;
 
 namespace photo_album
 {
@@ -30,7 +32,16 @@ namespace photo_album
             {
                 Stream dataStream = response.GetResponseStream();
                 StreamReader reader = new StreamReader(dataStream);
-                return reader.ReadToEnd();
+                string responseFromServer = reader.ReadToEnd();
+
+                var doc = JsonDocument.Parse(responseFromServer);
+                StringBuilder songStrings = new StringBuilder();
+                foreach (var item in doc.RootElement.EnumerateArray())
+                {
+                    foreach (var property in item.EnumerateObject())
+                        songStrings.Append(property.Value.ToString() + '\n');
+                }
+                return songStrings.ToString();
             }
             else
             {
