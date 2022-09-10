@@ -36,7 +36,7 @@ namespace photo_album
             // Return if the input is not an int.
             if (!int.TryParse(input, out int albumId))
                 return "albumId must be an int!\n";
-            // Return if the input is not between 1 - 100.
+            // Return if the albumId is not between 1 - 100.
             if (albumId > 100 || albumId < 1)
                 return "albumId must be between 1 and 100!\n";
 
@@ -45,19 +45,12 @@ namespace photo_album
             try
             {
                 string response = await httpClient.GetStringAsync(uri);
-                // Parse the data stream as a Json document.
-                var doc = JsonDocument.Parse(response);
-                // Use a string builder to create output string as we loop over the Json array.
+                List<Photo> album = JsonSerializer.Deserialize<List<Photo>>(response) ?? new List<Photo>();
+                // Use a string builder to create an output string as we loop over the album array.
                 StringBuilder strPhotos = new StringBuilder();
-                foreach (var item in doc.RootElement.EnumerateArray())
+                foreach (Photo photo in album)
                 {
-                    foreach (var property in item.EnumerateObject())
-                    {
-                        if (property.NameEquals("id"))
-                            strPhotos.Append('[' + property.Value.ToString() + ']');
-                        else if (property.NameEquals("title"))
-                            strPhotos.Append(' ' + property.Value.ToString() + '\n');
-                    }
+                    strPhotos.Append('[' + photo.id.ToString() + "] " + photo.title + '\n');
                 }
                 return strPhotos.ToString();
             }
@@ -66,5 +59,10 @@ namespace photo_album
                 return "Could not make web request.\n";
             }
         }
+    }
+    class Photo
+    {
+        public int id { get; set; }
+        public string title { get; set; } = string.Empty;
     }
 }
