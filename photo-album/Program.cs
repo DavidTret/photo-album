@@ -11,11 +11,24 @@ namespace photo_album
         private static readonly HttpClient httpClient = new HttpClient();
         static void Main(string[] args)
         {
-            while (true)
+            if (args.Length == 0)
             {
-                string input = Console.ReadLine() ?? string.Empty;
-                string output = Find(input);
-                Console.Write(output);
+                while (true)
+                {
+                    string input = Console.ReadLine() ?? string.Empty;
+                    if (string.IsNullOrEmpty(input))
+                        break;
+                    string output = Find(input);
+                    Console.Write(output);
+                }
+            }
+            else
+            {
+                foreach (string arg in args)
+                {
+                    string output = Find(arg);
+                    Console.Write(output);
+                }
             }
         }
         public static string Find(string input)
