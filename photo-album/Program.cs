@@ -9,7 +9,7 @@ namespace photo_album
     public class Program
     {
         private static readonly HttpClient httpClient = new HttpClient();
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             if (args.Length == 0)
             {
@@ -18,7 +18,7 @@ namespace photo_album
                     string input = Console.ReadLine() ?? string.Empty;
                     if (string.IsNullOrEmpty(input))
                         break;
-                    string output = Find(input);
+                    string output = await Find(input);
                     Console.Write(output);
                 }
             }
@@ -26,12 +26,12 @@ namespace photo_album
             {
                 foreach (string arg in args)
                 {
-                    string output = Find(arg);
+                    string output = await Find(arg);
                     Console.Write(output);
                 }
             }
         }
-        public static string Find(string input)
+        public static async Task<string> Find(string input)
         {
             // Return if the input is not an int.
             if (!int.TryParse(input, out int value))
@@ -45,13 +45,9 @@ namespace photo_album
 
             try
             {
-                var task = httpClient.GetAsync(uri);
-                task.Wait();
-                var response = task.Result;
-                HttpContent content = response.Content;
-                string responseFromServer = content.ReadAsStringAsync().Result;
+                string response = await httpClient.GetStringAsync(uri);
                 // Parse the data stream as a Json document.
-                var doc = JsonDocument.Parse(responseFromServer);
+                var doc = JsonDocument.Parse(response);
                 // Use a string builder to create output string as we loop over the Json array.
                 StringBuilder songStrings = new StringBuilder();
                 foreach (var item in doc.RootElement.EnumerateArray())

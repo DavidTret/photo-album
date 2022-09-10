@@ -1,4 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Threading.Tasks;
 using photo_album;
 
 namespace PhotoAlbumTests
@@ -7,37 +8,37 @@ namespace PhotoAlbumTests
     public class UnitTest1
     {
         [TestMethod]
-        public void BadInputTest()
+        public async Task BadInputTest()
         {
             // Define test input and outputs.
             string input = "notAnInt";
             string output = "albumID must be an int!\n";
             // Run the method under the test.
-            string programOutput = Program.Find(input);
+            string programOutput = await Program.Find(input);
             Assert.AreEqual(output, programOutput);
         }
         [TestMethod]
-        public void LowInputTest()
+        public async Task LowInputTest()
         {
             // Define test input and outputs.
             string input = "0";
             string output = "albumID must be between 1 and 100!\n";
             // Run the method under the test.
-            string programOutput = Program.Find(input);
+            string programOutput = await Program.Find(input);
             Assert.AreEqual(output, programOutput);
         }
         [TestMethod]
-        public void HighInputTest()
+        public async Task HighInputTest()
         {
             // Define test input and outputs.
             string input = "101";
             string output = "albumID must be between 1 and 100!\n";
             // Run the method under the test.
-            string programOutput = Program.Find(input);
+            string programOutput = await Program.Find(input);
             Assert.AreEqual(output, programOutput);
         }
         [TestMethod]
-        public void ValidInputTest()
+        public async Task ValidInputTest()
         {
             // Define test input and outputs.
             string input = "2";
@@ -93,7 +94,7 @@ namespace PhotoAlbumTests
                 "[99] magnam dolor sed enim vel optio consequuntur\n" +
                 "[100] et qui rerum\n";
             // Run the method under the test.
-            string programOutput = Program.Find(input);
+            string programOutput = await Program.Find(input);
             Assert.AreEqual(output, programOutput);
         }
     }
