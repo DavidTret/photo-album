@@ -12,9 +12,9 @@ namespace PhotoAlbumTests
         {
             // Define test input and outputs.
             string input = "notAnInt";
-            string output = "albumID must be an int!\n";
+            string output = "albumId must be an int!\n";
             // Run the method under the test.
-            string programOutput = await Program.Find(input);
+            string programOutput = await Program.GetPhotos(input);
             Assert.AreEqual(output, programOutput);
         }
         [TestMethod]
@@ -22,9 +22,9 @@ namespace PhotoAlbumTests
         {
             // Define test input and outputs.
             string input = "0";
-            string output = "albumID must be between 1 and 100!\n";
+            string output = "albumId must be between 1 and 100!\n";
             // Run the method under the test.
-            string programOutput = await Program.Find(input);
+            string programOutput = await Program.GetPhotos(input);
             Assert.AreEqual(output, programOutput);
         }
         [TestMethod]
@@ -32,9 +32,9 @@ namespace PhotoAlbumTests
         {
             // Define test input and outputs.
             string input = "101";
-            string output = "albumID must be between 1 and 100!\n";
+            string output = "albumId must be between 1 and 100!\n";
             // Run the method under the test.
-            string programOutput = await Program.Find(input);
+            string programOutput = await Program.GetPhotos(input);
             Assert.AreEqual(output, programOutput);
         }
         [TestMethod]
@@ -42,7 +42,7 @@ namespace PhotoAlbumTests
         {
             // Define test input and outputs.
             string input = "2";
-            string output = 
+            string output =
                 "[51] non sunt voluptatem placeat consequuntur rem incidunt\n" +
                 "[52] eveniet pariatur quia nobis reiciendis laboriosam ea\n" +
                 "[53] soluta et harum aliquid officiis ab omnis consequatur\n" +
@@ -94,7 +94,7 @@ namespace PhotoAlbumTests
                 "[99] magnam dolor sed enim vel optio consequuntur\n" +
                 "[100] et qui rerum\n";
             // Run the method under the test.
-            string programOutput = await Program.Find(input);
+            string programOutput = await Program.GetPhotos(input);
             Assert.AreEqual(output, programOutput);
         }
     }
